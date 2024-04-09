@@ -55,18 +55,19 @@ Firmware builds under Arduino IDE.
 
 Required libs. Install using Arduino IDE.
 
-[arduino-pico (3.1.1)](https://github.com/earlephilhower/arduino-pico#installing-via-arduino-boards-manager)<br/>
+[arduino-pico (3.7.2)](https://github.com/earlephilhower/arduino-pico#installing-via-arduino-boards-manager)<br/>
 [Pico-PIO-USB (0.5.3)](https://github.com/sekigon-gonnoc/Pico-PIO-USB)<br/>
-[Adafruit_TinyUSB_Arduino (2.2.6)](https://github.com/adafruit/Adafruit_TinyUSB_Arduino)
+[Adafruit_TinyUSB_Arduino (3.1.3)](https://github.com/adafruit/Adafruit_TinyUSB_Arduino)
 
 Configure IDE as:
 * Board: Raspberry Pi Pico
 * CPU Speed: 120MHz
 * USB Stack: Adafruit TinyUSB
+ 
+It's also needed insert `#define CFG_TUH_XINPUT 1` on `tusb_config.h` on your Adafruit_TinyUSB_Arduino installed folder
 
 ## Ready to use binaries
-~~Don't want to build from source? Check the releases page.~~
-Will be released shortly.
+Don't want to build from source? Check the releases page.
 
 ## Credits
 Logitech USB input code from my other project.

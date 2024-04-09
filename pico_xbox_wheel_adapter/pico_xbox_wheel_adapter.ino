@@ -18,6 +18,11 @@
 // D- must be DP +1
 #define PIN_USB_HOST_DP 0
 
+
+#ifndef CFG_TUH_XINPUT
+  #error CFG_TUH_XINPUT not enabled. define it at tusb_config.h
+#endif
+
 const uint8_t wheel_8bits = 0;
 const uint8_t wheel_10bits = 1;
 const uint8_t wheel_14bits = 2;
