@@ -3,11 +3,14 @@ A DIY adapter that can receive input from a logitech wheel and output as an (ori
 
 As a bonus it will also make some xbox/xinput controllers work on the original xbox. Console will still see it as a wheel but most games will work.
 
+Supports rumble.
+
 ### PRs are welcome!
 There's some stuff that still needs to be added and some QoL improvements. Would also like to map rumble to some kind of FFB effect.
 Let me know if you can help.
 
 ## Supported devices
+* WingMan Formula GP (no FFB)
 * WingMan Formula Force GP (GT Force)
 * Driving Force
 * Driving Force Pro (GT Force Pro)
@@ -15,6 +18,7 @@ Let me know if you can help.
 * G25 Racing Wheel
 * G27 Racing Wheel
 * G29 Racing Wheel
+* Speed Force Wireless
 
 ## Mapping
 | Wheel      | Xbox              |
@@ -40,6 +44,8 @@ Right paddle = X button (gear up)<br/>
  
 Most xbox games uses this configuration. Seems to be the mode used by the Mad Catz MC2 Wheel.
 
+Note: Speed Force Wireless and Formula GP have less buttons than required by xbox.
+
 ## Building
 Requires a Raspberry Pi Pico (RP2040) board and a USB Type-A port for input.
 
@@ -64,7 +70,7 @@ Configure IDE as:
 * CPU Speed: 120MHz
 * USB Stack: Adafruit TinyUSB
  
-It's also needed insert `#define CFG_TUH_XINPUT 1` on `tusb_config.h` on your Adafruit_TinyUSB_Arduino installed folder
+It's also needed to insert `#define CFG_TUH_XINPUT 1` on `tusb_config.h` on your Adafruit_TinyUSB_Arduino installed folder
 
 ## Ready to use binaries
 Don't want to build from source? Check the releases page.

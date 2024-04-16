@@ -65,6 +65,24 @@ typedef struct TU_ATTR_PACKED {
 } generic_report_t;
 
 
+// WingMan Formula GP
+typedef struct TU_ATTR_PACKED {
+  uint8_t wheel;
+  
+  uint8_t : 2; // padding? alwats zero
+  uint8_t L1 : 1;
+  uint8_t R1 : 1;
+  //no idea if the button mapping is correct.
+  uint8_t square : 1;   //top left.    label X. GT3: rear view
+  uint8_t triangle : 1; //top right.   label Y. GT3: ebrakePedal
+  uint8_t cross : 1;    //lower left.  label A. GT3: pause
+  uint8_t circle : 1;   //lower right. label B. GT3: reverse
+
+  uint8_t pedals; // combined pedals?
+  uint8_t gasPedal;
+  uint8_t brakePedal;
+} fgp_report_t;
+
 // WingMan Formula Force GP (GT Force)
 typedef struct TU_ATTR_PACKED {
   uint16_t wheel : 10;
@@ -206,7 +224,7 @@ typedef struct TU_ATTR_PACKED {
   uint8_t shifter_5 : 1;
   uint8_t shifter_6 : 1;
   uint8_t shifter_r : 1;
-  uint8_t : 1; //always 0
+  uint8_t : 1; // shifter mode? 0 = H, 1 = Sequential
   
   uint8_t pedal_disconnected : 1;
   uint8_t power_connected : 1; //(power or calibrated? , not sure)
@@ -247,14 +265,14 @@ typedef struct TU_ATTR_PACKED {
   uint8_t R3 : 1;
   uint8_t L3 : 1;
 
-  uint8_t R4 : 1;
-  uint8_t R5 : 1;
   uint8_t shifter_1 : 1;
   uint8_t shifter_2 : 1;
   uint8_t shifter_3 : 1;
   uint8_t shifter_4 : 1;
   uint8_t shifter_5 : 1;
   uint8_t shifter_6 : 1;
+  uint8_t R4 : 1;
+  uint8_t R5 : 1;
   
   uint8_t L4 : 1;
   uint8_t L5 : 1;
@@ -326,3 +344,25 @@ typedef struct TU_ATTR_PACKED {
   uint8_t : 1; // unknown
 
 } g29_report_t;
+
+//Speed Force Wireless (WII)
+typedef struct TU_ATTR_PACKED {
+  uint16_t wheel : 10;
+  uint8_t : 2; // vendor. allways 0x2
+  uint8_t hat_l : 1;
+  uint8_t hat_r : 1;
+  uint8_t hat_d : 1;
+  uint8_t hat_u : 1;
+
+  uint8_t plus : 1;
+  uint8_t two : 1;
+  uint8_t one : 1;
+  uint8_t b : 1;
+  uint8_t a : 1;
+  uint8_t minus : 1;
+  uint8_t home : 1;
+  uint8_t connected : 1; // 0 when not connecded? or not paired?
+
+  uint8_t gasPedal; // right paddle (released 0xff, pressed 0x00)
+  uint8_t brakePedal; // left paddle (released 0xff, pressed 0x00)
+} sfw_report_t;
