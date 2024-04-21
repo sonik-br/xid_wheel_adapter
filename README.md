@@ -45,7 +45,9 @@ Right paddle = X button (gear up)<br/>
  
 Most xbox games uses this configuration. Seems to be the mode used by the Mad Catz MC2 Wheel.
 
-Note: Speed Force Wireless and Formula GP have less buttons than required by xbox.
+Notes:
+* Speed Force Wireless and Formula GP have less buttons than required by xbox.
+* Sometimes the adapter does not detect the G920 (XBOX). Connecting it to the adapter first, then to the console, seems to work all the time.
 
 ## Building
 Requires a Raspberry Pi Pico (RP2040) board and a USB Type-A port for input.
