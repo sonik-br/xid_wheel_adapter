@@ -804,6 +804,33 @@ void tuh_xinput_report_received_cb(uint8_t dev_addr, uint8_t instance, xinputh_i
 
       xpad_data.rightStickX = p->sThumbRX;
       xpad_data.rightStickY = p->sThumbRY;
+
+      uint16_t PID, VID;
+      tuh_vid_pid_get(dev_addr, &VID, &PID);
+      if (VID == 0x046d && PID == 0xc261) { // Logitech G920
+        // limit the wheel rotation value
+        const int16_t wheel_max = 7000L;
+        const int16_t wheel_min = -wheel_max;
+
+        int16_t wheel = p->sThumbLX;
+        if (wheel > wheel_max)
+          wheel = wheel_max;
+        else if (wheel < wheel_min)
+          wheel = wheel_min;
+  
+        xpad_data.leftStickX = map(wheel, wheel_min, wheel_max, INT16_MIN, INT16_MAX);
+
+        // map the paddle shifters
+        if (p->wButtons & XINPUT_GAMEPAD_LEFT_SHOULDER)
+          xpad_data.A = 0xFF;
+        if (p->wButtons & XINPUT_GAMEPAD_RIGHT_SHOULDER)
+          xpad_data.B = 0xFF;
+
+        // clear those
+        xpad_data.BLACK = 0;
+        xpad_data.WHITE = 0;
+      }
+      
     }
   }
   

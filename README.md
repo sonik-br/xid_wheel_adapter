@@ -10,7 +10,7 @@ There's some stuff that still needs to be added and some QoL improvements. Would
 Let me know if you can help.
 
 ## Supported devices
-* WingMan Formula GP (no FFB)
+* WingMan Formula GP (no rumble)
 * WingMan Formula Force GP (GT Force)
 * Driving Force
 * Driving Force Pro (GT Force Pro)
@@ -18,6 +18,7 @@ Let me know if you can help.
 * G25 Racing Wheel
 * G27 Racing Wheel
 * G29 Racing Wheel
+* G920 (XBOX) (no rumble)
 * Speed Force Wireless
 
 ## Mapping

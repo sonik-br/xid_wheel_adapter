@@ -501,15 +501,28 @@ bool xinputh_xfer_cb(uint8_t dev_addr, uint8_t ep_addr, xfer_result_t result, ui
                 if (rdata[22] && 0x01) pad->wButtons   |= XINPUT_GAMEPAD_SHARE;
                 if (guide_state) pad->wButtons   |= XINPUT_GAMEPAD_GUIDE;
 
-                //Map the left and right triggers
-                pad->bLeftTrigger = (rdata[7] << 8 | rdata[6]) >> 2;
-                pad->bRightTrigger = (rdata[9] << 8 | rdata[8]) >> 2;
+                uint16_t PID, VID;
+                tuh_vid_pid_get(dev_addr, &VID, &PID);
+                if (VID == 0x046d && PID == 0xc261) {
+                  // Logitech G920
+                  pad->sThumbLX = (rdata[7] << 8 | rdata[6]) - 32768UL; // Wheel
+                  pad->bRightTrigger = (rdata[8] << 8) + rdata[8];  // Gas pedal
+                  pad->bLeftTrigger = (rdata[10] << 8) + rdata[10];  // Brake pedal
+                  //pad->bLeftTrigger = (rdata[12] << 8) + rdata[12];  // Clutch pedal
+                  pad->sThumbLY = 0;
+                  pad->sThumbRX = 0;
+                  pad->sThumbRY = 0;
+                } else {
+                  //Map the left and right triggers
+                  pad->bLeftTrigger = (rdata[7] << 8 | rdata[6]) >> 2;
+                  pad->bRightTrigger = (rdata[9] << 8 | rdata[8]) >> 2;
 
-                //Map analog sticks
-                pad->sThumbLX = rdata[11] << 8 | rdata[10];
-                pad->sThumbLY = rdata[13] << 8 | rdata[12];
-                pad->sThumbRX = rdata[15] << 8 | rdata[14];
-                pad->sThumbRY = rdata[17] << 8 | rdata[16];
+                  //Map analog sticks
+                  pad->sThumbLX = rdata[11] << 8 | rdata[10];
+                  pad->sThumbLY = rdata[13] << 8 | rdata[12];
+                  pad->sThumbRX = rdata[15] << 8 | rdata[14];
+                  pad->sThumbRY = rdata[17] << 8 | rdata[16];
+                }
 
                 xid_itf->new_pad_data = true;
             }
